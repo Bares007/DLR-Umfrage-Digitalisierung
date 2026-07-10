@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Erhebung Digitalisierungsgrad im Beratungswesen der DLR Rheinland-Pfalz</title>
+<style>
+  :root{
+    --green:#005f3c;
+    --green2:#008a5b;
+    --light:#f4f8f6;
+    --border:#d9e3dd;
+    --text:#1f2933;
+    --muted:#5f6b73;
+    --warning:#fff7ed;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial, Helvetica, sans-serif;background:linear-gradient(135deg,#eef7f2,#ffffff);color:var(--text);}
+  header{background:var(--green);color:white;padding:22px 30px;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+  header h1{margin:0;font-size:1.35rem;line-height:1.3;font-weight:700}
+  header p{margin:.35rem 0 0;font-size:.95rem;opacity:.92}
+  main{max-width:980px;margin:28px auto;padding:0 18px 40px}
+  .card{background:white;border:1px solid var(--border);border-radius:18px;padding:26px;box-shadow:0 8px 28px rgba(0,0,0,.06);margin-bottom:18px}
+  .topline{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap}
+  .badge{background:var(--light);border:1px solid var(--border);padding:8px 12px;border-radius:999px;font-size:.9rem;color:var(--green);font-weight:700}
+  .progress-wrap{height:10px;background:#e7eee9;border-radius:999px;overflow:hidden;flex:1;min-width:220px;max-width:500px}
+  .progress{height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--green2));transition:width .25s ease}
+  .page{display:none}
+  .page.active{display:block}
+  h2{color:var(--green);margin:0 0 10px;font-size:1.35rem}
+  h3{margin:22px 0 10px;color:#24342d;font-size:1.02rem}
+  p.help{color:var(--muted);line-height:1.5;margin-top:6px}
+  .question{border-top:1px solid var(--border);padding-top:18px;margin-top:18px}
+  label{display:block;margin:8px 0;line-height:1.35}
+  input[type="text"], input[type="email"], textarea, select{width:100%;padding:11px 12px;border:1px solid #cbd5ce;border-radius:10px;font-size:1rem;background:white}
+  textarea{min-height:95px;resize:vertical}
+  input[type="checkbox"],input[type="radio"]{transform:scale(1.1);margin-right:8px;accent-color:var(--green)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:4px 18px}
+  .scale{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-top:8px}
+  .scale label{border:1px solid var(--border);border-radius:12px;padding:10px;background:#fbfdfc}
+  .buttons{display:flex;justify-content:space-between;gap:12px;margin-top:22px;flex-wrap:wrap}
+  button{border:0;border-radius:12px;padding:12px 18px;font-size:1rem;cursor:pointer;font-weight:700}
+  .primary{background:var(--green);color:white}.primary:hover{background:#004d31}
+  .secondary{background:#eaf2ee;color:var(--green)}.secondary:hover{background:#dfece6}
+  .ghost{background:white;border:1px solid var(--border);color:var(--green)}
+  .note{background:var(--warning);border:1px solid #fed7aa;border-radius:14px;padding:14px;margin:14px 0;color:#7c2d12}
+  .result{white-space:pre-wrap;background:#0f172a;color:#e2e8f0;border-radius:14px;padding:16px;max-height:400px;overflow:auto;font-family:Consolas,monospace;font-size:.9rem}
+  .small{font-size:.88rem;color:var(--muted)}
+  .hidden{display:none!important}
+  footer{font-size:.85rem;color:var(--muted);text-align:center;margin-top:18px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Erhebung des Digitalisierungsgrades im Beratungswesen der DLR Rheinland-Pfalz</h1>
+  <p>Projekt „Digitales Beratungswesen“ · Schwerpunkt Organisation und Durchführung der Beratung</p>
+</header>
+<main>
+<form id="survey" class="card">
+  <div class="topline">
+    <span class="badge" id="stepLabel">Start</span>
+    <div class="progress-wrap"><div class="progress" id="progress"></div></div>
+  </div>
+
+  <section class="page active" data-title="Start">
+    <h2>Willkommen</h2>
+    <p class="help">Mit dieser Erhebung soll der aktuelle Stand der Digitalisierung in der Beratung der Dienstleistungszentren Ländlicher Raum Rheinland-Pfalz erfasst werden. Bitte stimmen Sie die Antworten innerhalb Ihrer Dienststelle mit den relevanten Fachbereichen ab und fassen Sie die Rückmeldungen möglichst dienststellenbezogen zusammen.</p>
+    <p class="help">In Freitextfeldern können besondere Unterschiede zwischen Fachbereichen oder Beratungsgebieten ergänzt werden.</p>
+    <div class="note"><strong>Hinweis:</strong> Diese Datei ist ein eigenständiger Demo-Fragebogen. Die Antworten werden nicht automatisch an einen Server gesendet, sondern am Ende als CSV- oder JSON-Datei heruntergeladen.</div>
+  </section>
+
+  <section class="page" data-title="Allgemeine Angaben">
+    <h2>Teil A – Allgemeine Angaben</h2>
+    <div class="question"><h3>1. Für welches DLR wird der Fragebogen ausgefüllt?</h3><select name="DLR"><option value="">Bitte auswählen</option><option>DLR Eifel</option><option>DLR Mosel</option><option>DLR Rheinhessen-Nahe-Hunsrück</option><option>DLR Rheinpfalz</option><option>DLR Westerwald-Osteifel</option><option>DLR Westpfalz</option><option>Sonstiges</option></select></div>
+    <div class="question"><h3>2. Abteilung / Gruppe</h3><input type="text" name="Abteilung_Gruppe" placeholder="z. B. Abteilung 440" /></div>
+    <div class="question"><h3>3. Einbezogene Fachbereiche / Beratungsgebiete</h3><div class="grid" data-name="Fachbereiche">
+      <label><input type="checkbox" value="Ackerbau">Ackerbau</label><label><input type="checkbox" value="Pflanzenbau allgemein">Pflanzenbau allgemein</label><label><input type="checkbox" value="Grünland / Futterbau">Grünland / Futterbau</label><label><input type="checkbox" value="Tierhaltung">Tierhaltung</label><label><input type="checkbox" value="Weinbau">Weinbau</label><label><input type="checkbox" value="Gartenbau">Gartenbau</label><label><input type="checkbox" value="Ökologischer Landbau">Ökologischer Landbau</label><label><input type="checkbox" value="Betriebswirtschaft">Betriebswirtschaft</label><label><input type="checkbox" value="Bildung / Schule">Bildung / Schule</label><label><input type="checkbox" value="Verwaltung / Organisation">Verwaltung / Organisation</label>
+    </div><input type="text" name="Fachbereiche_Sonstiges" placeholder="Sonstige Fachbereiche" /></div>
+    <div class="question"><h3>4. Ansprechperson für Rückfragen</h3><div class="grid"><input type="text" name="Kontakt_Name" placeholder="Name" /><input type="email" name="Kontakt_Email" placeholder="E-Mail" /><input type="text" name="Kontakt_Telefon" placeholder="Telefon optional" /></div></div>
+    <div class="question"><h3>5. Besondere Erfahrungen mit digitaler Beratung oder digitalen Tools</h3><textarea name="Erfahrungen_digitale_Beratung"></textarea></div>
+  </section>
+
+  <section class="page" data-title="Beratungsformate">
+    <h2>Teil B – Digitale Beratungsformate</h2>
+    <div class="question"><h3>6. Welche digitalen oder hybriden Beratungsformate werden aktuell genutzt?</h3><div class="grid" data-name="Beratungsformate">
+      <label><input type="checkbox" value="Newsletter">Newsletter</label><label><input type="checkbox" value="E-Mail-Verteiler">E-Mail-Verteiler</label><label><input type="checkbox" value="Webseitenbeiträge">Webseitenbeiträge</label><label><input type="checkbox" value="PDF-Informationsblätter">PDF-Informationsblätter</label><label><input type="checkbox" value="Messenger-Dienste">Messenger-Dienste</label><label><input type="checkbox" value="WhatsApp-Kanäle / Gruppen">WhatsApp-Kanäle / Gruppen</label><label><input type="checkbox" value="Podcasts">Podcasts</label><label><input type="checkbox" value="Videoformate / Erklärvideos">Videoformate / Erklärvideos</label><label><input type="checkbox" value="Livestreams">Livestreams</label><label><input type="checkbox" value="Social Media">Social Media</label><label><input type="checkbox" value="Online-Seminare">Online-Seminare</label><label><input type="checkbox" value="Hybride Seminare">Hybride Seminare</label><label><input type="checkbox" value="Digitale Feldbegehungen">Digitale Feldbegehungen</label><label><input type="checkbox" value="Online-Sprechstunden">Online-Sprechstunden</label><label><input type="checkbox" value="Digitale Einzelberatung">Digitale Einzelberatung</label><label><input type="checkbox" value="Webinare mit externen Referenten">Webinare mit externen Referenten</label><label><input type="checkbox" value="Digitale Schulungsplattformen">Digitale Schulungsplattformen</label><label><input type="checkbox" value="Keine digitalen Formate">Keine digitalen Formate</label>
+    </div><input type="text" name="Beratungsformate_Sonstiges" placeholder="Sonstige Formate" /></div>
+    <div class="question"><h3>7. Wie häufig werden digitale Formate zur Beratung eingesetzt?</h3><div class="scale" data-radio="Haeufigkeit_digitale_Formate"><label><input type="radio" name="Haeufigkeit_digitale_Formate" value="Nie">Nie</label><label><input type="radio" name="Haeufigkeit_digitale_Formate" value="Weniger als einmal im Monat">Weniger als einmal im Monat</label><label><input type="radio" name="Haeufigkeit_digitale_Formate" value="Monatlich">Monatlich</label><label><input type="radio" name="Haeufigkeit_digitale_Formate" value="Wöchentlich">Wöchentlich</label><label><input type="radio" name="Haeufigkeit_digitale_Formate" value="Mehrmals pro Woche">Mehrmals pro Woche</label><label><input type="radio" name="Haeufigkeit_digitale_Formate" value="Täglich">Täglich</label></div></div>
+    <div class="question"><h3>8. Anteil digitaler oder hybrider Beratung an der gesamten Beratungsarbeit</h3><div class="scale"><label><input type="radio" name="Anteil_digitale_Beratung" value="Unter 10 %">Unter 10 %</label><label><input type="radio" name="Anteil_digitale_Beratung" value="10 bis 25 %">10 bis 25 %</label><label><input type="radio" name="Anteil_digitale_Beratung" value="26 bis 50 %">26 bis 50 %</label><label><input type="radio" name="Anteil_digitale_Beratung" value="51 bis 75 %">51 bis 75 %</label><label><input type="radio" name="Anteil_digitale_Beratung" value="Über 75 %">Über 75 %</label></div></div>
+    <div class="question"><h3>9. Ziele digitaler Beratungsformate</h3><div class="grid" data-name="Ziele_digitale_Beratung"><label><input type="checkbox" value="Reichweitensteigerung">Reichweitensteigerung</label><label><input type="checkbox" value="Schnellere Informationsverbreitung">Schnellere Informationsverbreitung</label><label><input type="checkbox" value="Zeitersparnis">Zeitersparnis</label><label><input type="checkbox" value="Niedrigschwelliger Zugang">Niedrigschwelliger Zugang</label><label><input type="checkbox" value="Bessere Ansprache jüngerer Zielgruppen">Bessere Ansprache jüngerer Zielgruppen</label><label><input type="checkbox" value="Flexibilität für Teilnehmende">Flexibilität für Teilnehmende</label><label><input type="checkbox" value="Dokumentation / Nachnutzung">Dokumentation / Nachnutzung</label><label><input type="checkbox" value="Image / Sichtbarkeit">Image / Sichtbarkeit</label><label><input type="checkbox" value="Entlastung der Mitarbeitenden">Entlastung der Mitarbeitenden</label><label><input type="checkbox" value="Keine klaren Ziele definiert">Keine klaren Ziele definiert</label></div><input type="text" name="Ziele_Sonstiges" placeholder="Sonstiges Ziel" /></div>
+    <div class="question"><h3>10. Welche Zielgruppen werden digital erreicht?</h3><div class="grid" data-name="Zielgruppen"><label><input type="checkbox" value="Hauptberufliche Betriebe">Hauptberufliche Betriebe</label><label><input type="checkbox" value="Nebenerwerbsbetriebe">Nebenerwerbsbetriebe</label><label><input type="checkbox" value="Junglandwirte / Jungwinzer">Junglandwirte / Jungwinzer</label><label><input type="checkbox" value="Auszubildende / Studierende">Auszubildende / Studierende</label><label><input type="checkbox" value="Multiplikatoren / Verbände">Multiplikatoren / Verbände</label><label><input type="checkbox" value="Öffentlichkeit">Öffentlichkeit</label><label><input type="checkbox" value="Verwaltung / Behörden">Verwaltung / Behörden</label></div><input type="text" name="Zielgruppen_Sonstiges" placeholder="Sonstige Zielgruppen" /></div>
+    <div class="question"><h3>11. Welche digitalen Formate funktionieren bereits besonders gut?</h3><textarea name="Gut_funktionierende_Formate"></textarea></div>
+  </section>
+
+  <section class="page" data-title="Technik">
+    <h2>Teil C – Technische Ausstattung und Software</h2>
+    <div class="question"><h3>12. Welche technische Ausstattung steht zur Verfügung?</h3><div class="grid" data-name="Technische_Ausstattung"><label><input type="checkbox" value="Dienstlaptop">Dienstlaptop</label><label><input type="checkbox" value="Tablet">Tablet</label><label><input type="checkbox" value="Smartphone">Smartphone</label><label><input type="checkbox" value="Webcam">Webcam</label><label><input type="checkbox" value="Professionelle Kamera">Professionelle Kamera</label><label><input type="checkbox" value="Mikrofon / Headset">Mikrofon / Headset</label><label><input type="checkbox" value="Lautsprecheranlage">Lautsprecheranlage</label><label><input type="checkbox" value="Streaming-Technik">Streaming-Technik</label><label><input type="checkbox" value="Präsentationsdisplay / Smartboard">Präsentationsdisplay / Smartboard</label><label><input type="checkbox" value="Mobile Präsentationstechnik">Mobile Präsentationstechnik</label><label><input type="checkbox" value="Keine ausreichende Ausstattung">Keine ausreichende Ausstattung</label></div><input type="text" name="Technische_Ausstattung_Sonstiges" placeholder="Sonstige Ausstattung" /></div>
+    <div class="question"><h3>13. Wie bewerten Sie die technische Ausstattung insgesamt?</h3><div class="scale"><label><input type="radio" name="Bewertung_Ausstattung" value="Sehr gut">Sehr gut</label><label><input type="radio" name="Bewertung_Ausstattung" value="Gut">Gut</label><label><input type="radio" name="Bewertung_Ausstattung" value="Ausreichend">Ausreichend</label><label><input type="radio" name="Bewertung_Ausstattung" value="Verbesserungswürdig">Verbesserungswürdig</label><label><input type="radio" name="Bewertung_Ausstattung" value="Unzureichend">Unzureichend</label></div></div>
+    <div class="question"><h3>14. Welche Software oder Plattformen werden genutzt?</h3><div class="grid" data-name="Software_Plattformen"><label><input type="checkbox" value="Microsoft Teams">Microsoft Teams</label><label><input type="checkbox" value="Zoom">Zoom</label><label><input type="checkbox" value="Webex">Webex</label><label><input type="checkbox" value="BigBlueButton">BigBlueButton</label><label><input type="checkbox" value="Canva">Canva</label><label><input type="checkbox" value="Adobe-Produkte">Adobe-Produkte</label><label><input type="checkbox" value="Schnittsoftware für Videos">Schnittsoftware für Videos</label><label><input type="checkbox" value="Podcast-Software">Podcast-Software</label><label><input type="checkbox" value="Social-Media-Planungstools">Social-Media-Planungstools</label><label><input type="checkbox" value="Newsletter-Software">Newsletter-Software</label><label><input type="checkbox" value="Cloudlösungen / Datenaustausch">Cloudlösungen / Datenaustausch</label><label><input type="checkbox" value="Wissensdatenbanken">Wissensdatenbanken</label><label><input type="checkbox" value="Kollaborationstools">Kollaborationstools</label></div><input type="text" name="Software_Sonstiges" placeholder="Sonstige Software" /></div>
+    <div class="question"><h3>15. Gibt es standardisierte Prozesse oder Leitlinien?</h3><div class="scale"><label><input type="radio" name="Leitlinien" value="Ja, schriftlich dokumentiert">Ja, schriftlich dokumentiert</label><label><input type="radio" name="Leitlinien" value="Teilweise">Teilweise</label><label><input type="radio" name="Leitlinien" value="In Planung">In Planung</label><label><input type="radio" name="Leitlinien" value="Nein">Nein</label><label><input type="radio" name="Leitlinien" value="Nicht bekannt">Nicht bekannt</label></div></div>
+    <div class="question"><h3>16. Welche technischen oder organisatorischen Verbesserungen wären besonders wichtig?</h3><textarea name="Verbesserungen_Technik_Organisation"></textarea></div>
+  </section>
+
+  <section class="page" data-title="Kompetenzen">
+    <h2>Teil D – Kompetenzen und Organisation</h2>
+    <div class="question"><h3>17. Digitale Kompetenzen im Beratungsbereich</h3><div class="scale"><label><input type="radio" name="Digitale_Kompetenzen" value="Sehr gut">Sehr gut</label><label><input type="radio" name="Digitale_Kompetenzen" value="Gut">Gut</label><label><input type="radio" name="Digitale_Kompetenzen" value="Mittel">Mittel</label><label><input type="radio" name="Digitale_Kompetenzen" value="Gering">Gering</label><label><input type="radio" name="Digitale_Kompetenzen" value="Sehr gering">Sehr gering</label></div></div>
+    <div class="question"><h3>18. Welche Hindernisse bestehen aktuell?</h3><div class="grid" data-name="Hindernisse"><label><input type="checkbox" value="Fehlende Zeit">Fehlende Zeit</label><label><input type="checkbox" value="Fehlende personelle Ressourcen">Fehlende personelle Ressourcen</label><label><input type="checkbox" value="Fehlende technische Ausstattung">Fehlende technische Ausstattung</label><label><input type="checkbox" value="Fehlende Software">Fehlende Software</label><label><input type="checkbox" value="Fehlende Schulungen">Fehlende Schulungen</label><label><input type="checkbox" value="Unsicherheit im Umgang mit Technik">Unsicherheit im Umgang mit Technik</label><label><input type="checkbox" value="Fehlende strategische Vorgaben">Fehlende strategische Vorgaben</label><label><input type="checkbox" value="Datenschutzbedenken">Datenschutzbedenken</label><label><input type="checkbox" value="Geringe Nachfrage">Geringe Nachfrage</label><label><input type="checkbox" value="Schlechte Internetverbindung">Schlechte Internetverbindung</label><label><input type="checkbox" value="Keine klaren Zuständigkeiten">Keine klaren Zuständigkeiten</label></div><input type="text" name="Hindernisse_Sonstiges" placeholder="Sonstige Hindernisse" /></div>
+    <div class="question"><h3>19. Welche Unterstützungsangebote wären hilfreich?</h3><div class="grid" data-name="Unterstuetzungsangebote"><label><input type="checkbox" value="Schulungen">Schulungen</label><label><input type="checkbox" value="Austausch zwischen den DLR">Austausch zwischen den DLR</label><label><input type="checkbox" value="Technikpool">Technikpool</label><label><input type="checkbox" value="Leitfäden / Standards">Leitfäden / Standards</label><label><input type="checkbox" value="Best-Practice-Sammlungen">Best-Practice-Sammlungen</label><label><input type="checkbox" value="Gemeinsame Softwarelösungen">Gemeinsame Softwarelösungen</label><label><input type="checkbox" value="Unterstützung bei Content-Erstellung">Unterstützung bei Content-Erstellung</label><label><input type="checkbox" value="Strategische Beratung">Strategische Beratung</label><label><input type="checkbox" value="Rechtliche Hilfestellungen">Rechtliche Hilfestellungen</label></div><input type="text" name="Unterstuetzung_Sonstiges" placeholder="Sonstige Unterstützung" /></div>
+    <div class="question"><h3>20. Gibt es Personen oder Arbeitsbereiche, die gute Beispiele einbringen könnten?</h3><textarea name="Kompetenzen_Best_Practice"></textarea></div>
+  </section>
+
+  <section class="page" data-title="Entwicklung">
+    <h2>Teil E – Bewertung und Entwicklungsbedarf</h2>
+    <div class="question"><h3>21. Aktueller Digitalisierungsgrad der Beratungsarbeit insgesamt</h3><div class="scale"><label><input type="radio" name="Digitalisierungsgrad" value="Sehr hoch">Sehr hoch</label><label><input type="radio" name="Digitalisierungsgrad" value="Hoch">Hoch</label><label><input type="radio" name="Digitalisierungsgrad" value="Mittel">Mittel</label><label><input type="radio" name="Digitalisierungsgrad" value="Gering">Gering</label><label><input type="radio" name="Digitalisierungsgrad" value="Sehr gering">Sehr gering</label></div></div>
+    <div class="question"><h3>22. Wo sehen Sie kurzfristig den größten Handlungsbedarf?</h3><textarea name="Handlungsbedarf"></textarea></div>
+    <div class="question"><h3>23. Welche digitalen Formate oder Ansätze funktionieren bereits besonders gut?</h3><textarea name="Bestandsformate_gut"></textarea></div>
+    <div class="question"><h3>24. Welche innovativen Ideen oder Projekte möchten Sie künftig umsetzen?</h3><textarea name="Innovative_Ideen"></textarea></div>
+    <div class="question"><h3>25. Welche Rahmenbedingungen müssten geschaffen werden?</h3><textarea name="Rahmenbedingungen"></textarea></div>
+  </section>
+
+  <section class="page" data-title="Austauschgruppe">
+    <h2>Teil F – Austauschgruppe „Digitalisierung der Beratung“</h2>
+    <div class="question"><h3>26. Welche Themen sollten prioritär behandelt werden?</h3><div class="grid" data-name="Themen_Austauschgruppe"><label><input type="checkbox" value="Hybride Veranstaltungsformate">Hybride Veranstaltungsformate</label><label><input type="checkbox" value="Social Media in der Beratung">Social Media in der Beratung</label><label><input type="checkbox" value="Newsletter / Informationsmanagement">Newsletter / Informationsmanagement</label><label><input type="checkbox" value="Podcasts / Videoformate">Podcasts / Videoformate</label><label><input type="checkbox" value="Technik und Ausstattung">Technik und Ausstattung</label><label><input type="checkbox" value="Schulungen">Schulungen</label><label><input type="checkbox" value="Best-Practice-Austausch">Best-Practice-Austausch</label><label><input type="checkbox" value="Datenschutz / Recht">Datenschutz / Recht</label><label><input type="checkbox" value="KI-Anwendungen">KI-Anwendungen</label><label><input type="checkbox" value="Mobile Beratung">Mobile Beratung</label><label><input type="checkbox" value="Digitale Wissensplattformen">Digitale Wissensplattformen</label></div><input type="text" name="Themen_Sonstiges" placeholder="Sonstiges Thema" /></div>
+    <div class="question"><h3>27. Bereitschaft, eigene Projekte oder Erfahrungen vorzustellen</h3><div class="scale"><label><input type="radio" name="Bereitschaft_Vorstellung" value="Ja">Ja</label><label><input type="radio" name="Bereitschaft_Vorstellung" value="Vielleicht">Vielleicht</label><label><input type="radio" name="Bereitschaft_Vorstellung" value="Nein">Nein</label></div></div>
+    <div class="question hidden" id="themaFrage"><h3>28. Mögliches Thema</h3><textarea name="Moegliches_Thema"></textarea><p class="small">Diese Frage erscheint nur bei „Ja“ oder „Vielleicht“.</p></div>
+  </section>
+
+  <section class="page" data-title="Abschluss">
+    <h2>Abschluss</h2>
+    <div class="question"><h3>29. Möchten Sie noch etwas ergänzen?</h3><textarea name="Ergaenzende_Hinweise"></textarea></div>
+    <p class="help">Vielen Dank für Ihre Rückmeldung. Nach dem Absenden können die Daten als CSV oder JSON heruntergeladen werden.</p>
+    <div class="buttons"><button type="button" class="ghost" onclick="downloadCSV()">CSV herunterladen</button><button type="button" class="ghost" onclick="downloadJSON()">JSON herunterladen</button></div>
+    <h3>Vorschau der erfassten Daten</h3><div class="result" id="output">Noch keine Daten erzeugt.</div>
+  </section>
+
+  <div class="buttons"><button type="button" class="secondary" id="prevBtn">Zurück</button><button type="button" class="primary" id="nextBtn">Weiter</button></div>
+</form>
+<footer>Demo-Datei · keine Serverübertragung · lokale Auswertung im Browser</footer>
+</main>
+<script>
+const pages=[...document.querySelectorAll('.page')];let idx=0;
+const progress=document.getElementById('progress'), stepLabel=document.getElementById('stepLabel');
+function showPage(i){idx=i;pages.forEach((p,n)=>p.classList.toggle('active',n===idx));stepLabel.textContent=(idx+1)+' / '+pages.length+' · '+pages[idx].dataset.title;progress.style.width=((idx)/(pages.length-1)*100)+'%';document.getElementById('prevBtn').style.visibility=idx===0?'hidden':'visible';document.getElementById('nextBtn').textContent=idx===pages.length-1?'Daten anzeigen':'Weiter';window.scrollTo({top:0,behavior:'smooth'});} 
+document.getElementById('prevBtn').onclick=()=>showPage(Math.max(0,idx-1));
+document.getElementById('nextBtn').onclick=()=>{if(idx<pages.length-1)showPage(idx+1);else renderOutput();};
+document.querySelectorAll('input[name="Bereitschaft_Vorstellung"]').forEach(r=>r.addEventListener('change',()=>{const v=document.querySelector('input[name="Bereitschaft_Vorstellung"]:checked')?.value;document.getElementById('themaFrage').classList.toggle('hidden',!(v==='Ja'||v==='Vielleicht'));}));
+function collect(){const data={};document.querySelectorAll('input[type="text"],input[type="email"],textarea,select').forEach(el=>{data[el.name]=el.value.trim();});document.querySelectorAll('input[type="radio"]:checked').forEach(el=>{data[el.name]=el.value;});document.querySelectorAll('[data-name]').forEach(group=>{const name=group.dataset.name;data[name]=[...group.querySelectorAll('input[type="checkbox"]:checked')].map(x=>x.value).join('; ');});return data;}
+function renderOutput(){document.getElementById('output').textContent=JSON.stringify(collect(),null,2);} 
+function download(filename, text, type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:type}));a.download=filename;a.click();URL.revokeObjectURL(a.href);} 
+function escCSV(v){v=String(v??'');return '"'+v.replace(/"/g,'""')+'"';}
+function downloadCSV(){const d=collect();const keys=Object.keys(d);const csv=keys.map(escCSV).join(';')+'\n'+keys.map(k=>escCSV(d[k])).join(';');download('dlr_digitales_beratungswesen_antwort.csv',csv,'text/csv;charset=utf-8');renderOutput();}
+function downloadJSON(){const json=JSON.stringify(collect(),null,2);download('dlr_digitales_beratungswesen_antwort.json',json,'application/json;charset=utf-8');renderOutput();}
+showPage(0);
+</script>
+</body>
+</html>
